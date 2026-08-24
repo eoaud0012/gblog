@@ -1,0 +1,53 @@
+baseURL: "https://eoaud0012.github.io/gblog/"
+locale: ko-KR
+title: 살까 노트
+theme: PaperMod
+timeZone: Asia/Seoul
+enableRobotsTXT: true
+
+pagination:
+  pagerSize: 10
+
+minify:
+  disableXML: true
+
+outputs:
+  home: [HTML, RSS]
+
+params:
+  env: production
+  description: "사기 전에 확인할 규정·스펙·후기를 공식 출처와 함께 정리하는 블로그"
+  keywords: [구매가이드, 리뷰정리, 규정확인]
+  defaultTheme: auto
+  DateFormat: "2006년 1월 2일"
+  ShowReadingTime: true
+  ShowToc: true
+  TocOpen: false
+  ShowBreadCrumbs: true
+  ShowPostNavLinks: true
+  ShowShareButtons: false
+  hideSummary: false
+  homeInfoParams:
+    Title: 살까 노트
+    Content: >
+      사기 전에 확인해야 할 규정·스펙·사용자 후기를 공식 출처와 함께 정리합니다.
+      직접 써보지 않은 제품은 후기 요약임을 밝히고, 규정은 반드시 원 출처를 확인해 적습니다.
+
+menu:
+  main:
+    - identifier: posts
+      name: 글 목록
+      url: /posts/
+      weight: 10
+    - identifier: about
+      name: 소개
+      url: /about/
+      weight: 20
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: false
+  tableOfContents:
+    startLevel: 2
+    endLevel: 3
