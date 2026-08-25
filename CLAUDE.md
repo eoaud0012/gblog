@@ -39,3 +39,11 @@
 - **네이버 원본 3건 비공개 전환 완료**(사용자 명시 승인 하): Playwright + `.browser` 프로필로 `postupdate?logNo=` 진입 → 발행 패널 `label[for=open_private]` 클릭 → 발행. 3건 모두 비로그인 접근 차단 검증(m.blog 페이지에 본문 컨테이너 부재). 스크립트: 세션 스크래치패드 naver_make_private.py (재사용 시 ~/naver 쪽에 복사 권장).
 - **서치콘솔 등록 완료**(dtplanning0 계정, URL 접두어 속성): HTML 파일 인증(static/googleaafed9ca704bf87e.html — 삭제 금지), sitemap.xml 제출(23 URL, 제출 직후 "가져올 수 없음" 표시는 신규 속성 정상 — 수일 내 성공으로 바뀌는지 확인), 홈+글 3편 색인 생성 요청 완료.
 - **장기 대기 상태**: 색인·트래픽은 수개월 단위. 다음 블로그 작업 재개 시 체크리스트 — 서치콘솔 색인 현황, 쿠팡 가입 여부, 사람 발행 실험 결과(네이버 채널 생사).
+
+## 2026-08-25 세션 3 후반 — 커스텀 도메인 damnote.com 연결 완료
+- **도메인**: damnote.com, Cloudflare Registrar 에서 구매(연 $10.46, 갱신 동일). 계정 eoaud0012@gmail.com (dtplanning0 아님 주의). 범용 이름 선정 이유: 향후 다른 프로젝트도 서브도메인으로 얹기 위해(SEO 자산이 도메인에 귀속 → 플랫폼 이전 자유).
+- **DNS**(Cloudflare 존): A @ ×4 → 185.199.108~111.153, CNAME www → eoaud0012.github.io. **전부 DNS only(회색)** — GitHub 인증서 발급 조건, Proxied 로 바꾸지 말 것.
+- **GitHub Pages**: cname=damnote.com, https_enforced=true (gh api). 사이트가 damnote.com **루트**로 서빙되므로 내부 링크에 /gblog/ 접두어 금지. baseURL=https://damnote.com/ 로 변경, 캐리어→보조배터리 내부 링크 수정. 기존 github.io URL 은 자동 301.
+- **서치콘솔**: https://damnote.com/ 속성 신규 등록(기존 HTML 인증 파일로 자동 확인됨), sitemap.xml 제출 → 즉시 성공·23페이지 발견, 홈 색인 요청. github.io 속성은 301 덕에 자연 통합 — 삭제 불필요.
+- **Cloudflare 자동화 실측**: 대시보드는 익스텐션 탭에서 Turnstile 봇 탐지에 걸림 → 별도 크롬(--remote-debugging-port=9333, 임시 프로필) 띄워 사용자가 로그인 후 Playwright connect_over_cdp 로 조작하는 패턴이 통함. DNS 폼은 커스텀 위젯이라 Name 입력 → Tab → 값 타이핑 방식이 안정적. 스크립트: 스크래치패드 cf_dns2.py.
+- 사용자가 띄운 디버그 크롬 창은 닫아도 됨. 오라클 ARM 서버는 별도 세션에서 용량 대기 중(블로그와 무관).
